@@ -1,0 +1,97 @@
+{
+    "Genel Belirtiler (Vücut)": [
+        ["Ateş", "Ateşim çıktı"],
+        ["Bulantı", "Kusma hissi duyuyorum."],
+        ["Kusma", "İstifra ediyorum."],
+        ["Baş Dönmesi", "Başım dönüyor veya dengemi koruyamıyorum."],
+        ["Kilo Kaybı", "Önemli miktarda vücut ağırlığı kaybettim."],
+        ["Yorgunluk", "Aşırı yorgunluk ve enerji eksikliği hissediyorum."],
+        ["Aşırı Terleme", "Şiddetle terliyorum."],
+        ["Anemi", "Kırmızı kan hücresi eksikliğim var, bu da yorgunluğa neden oluyor."],
+        ["Üşüme", "Titreme veya soğuk hissetme."],
+        ["Şişmiş Damarlar", "Damarlarım şişmiş veya çıkıntılı görünüyor."],
+        ["Vücut Ağrıları", "Vücudumun çeşitli yerlerinde rahatsızlık veya ağrı hissediyorum."]
+    ],
+    "Baş/Boyun": [
+        ["Baş Ağrısı", "Başımda ağrı var."],
+        ["Boyun Ağrısı", "Boynumda ağrı hissediyorum."],
+        ["Tek Taraflı Baş Ağrısı", "Başımın bir tarafında yoğunlaşmış bir baş ağrısı hissediyorum."],
+        ["Karışıklık", "Oriantasyon bozukluğu yaşıyorum veya şeyleri anlamakta zorlanıyorum."],
+        ["Bulanık Görme", "Görüşüm net değil veya bulanık."],
+        ["Bozulmuş Görme", "Görüntüleri değişik veya anormal bir şekilde görüyorum."],
+        ["Işık ve Sese Hassasiyet", "Normalden daha fazla ışık ve sese karşı hassasiyetim var."],
+        ["Boyun Sertliği", "Boynum sert ve hareketi kısıtlı."]
+    ],
+    "Gözler": [
+        ["Kaşıntılı Gözler", "Gözlerim kaşınıyor."],
+        ["Sulu Gözler", "Gözlerim aşırı miktarda yaş üretiyor."],
+        ["Kızarık Gözler", "Gözlerimin beyazı kırmızı görünüyor."],
+        ["Göz Ağrısı", "Gözlerimde ağrı veya rahatsızlık hissediyorum."],
+        ["Sarı Gözler", "Gözlerimin beyazı sarımsı bir renge sahip."],
+        ["Bulanık Görme", "Görüşüm net değil veya bulanık."],
+        ["Işığa Hassasiyet", "Normalden daha fazla ışığa karşı hassasiyetim var."]
+    ],
+    "Sindirim Sistemi": [
+        ["Mide Yanması", "Göğsümde veya boğazımda yanma hissediyorum."],
+        ["Üst Karın veya Göğüs Ağrısı", "Üst karın veya göğüste ağrı hissediyorum."],
+        ["Yutma Güçlüğü", "Yiyecekleri ağzımdan mideye taşımakta zorlanıyorum."],
+        ["Boğazda Yabancı Cisim Hissi", "Boğazımda bir şey takılı kalmış gibi hissediyorum."],
+        ["Aşırı Susuzluk", "Çok susadım."],
+        ["Karın Ağrısı", "Karın bölgemde ağrı veya rahatsızlık hissediyorum."],
+        ["Şiddetli İshal", "Sık sık, sulu dışkılama yapıyorum."],
+        ["Kusma", "Mide içeriğimi ağzımdan çıkarıyorum."],
+        ["Bulantı", "Kusma hissi duyuyorum."],
+        ["Şişkinlik", "Karın bölgemde dolgunluk ve sıkılık hissediyorum."],
+        ["Geğirme", "Mideden ağız yoluyla gaz çıkarıyorum."],
+        ["İştah Azalması", "Yemek yeme isteğim azaldı."],
+        ["Hazımsızlık", "Üst karında rahatsızlık veya ağrı hissediyorum."]
+    ],
+    "Deri": [
+        ["Cilt rengindeki değişiklikler", "Cildimin renginde değişiklikler var."],
+        ["Kırmızı/kaşıntılı yaralar", "Cildimde kırmızı ve kaşıntılı yaralar var."],
+        ["Sarı veya bal renginde kabuklanmalar", "Cildimdeki kabuklar sarı veya bal renginde."],
+        ["Sıcak, kızarık ten", "Cildim sıcak ve kırmızı görünüyor."],
+        ["Pullu Deri", "Cildim kuru ve pullu."],
+        ["Döküntü", "Kırmızı, kabarık ve çoğunlukla kaşıntılı bir cilt döküntüm var."],
+        ["Kabuklar", "İyileşen bir yaramın üzerinde kurumuş kan veya irin var."],
+        ["Sıvı dolu kabarcıklar", "Cildimdeki kabarcıklar içinde berrak sıvı bulunuyor."],
+        ["Kaşıntı", "Cildimi kaşımam gerektiren bir hissiyat yaşıyorum."],
+        ["Kuru Cilt", "Cildim nemini yitirmiş ve pütürlü veya pul pul."],
+        ["Şişme", "Vücudumun bazı bölgelerinde ya da organlarında anormal büyüme var."]
+    ],
+    "İdrar yolu": [
+        ["İdrar yaparken ağrı", "İdrar yaparken ağrı veya rahatsızlık hissediyorum."],
+        ["İdrar yaparken yanma hissi", "İdrar yaparken yanma veya batma hissi yaşıyorum."],
+        ["Sık idrara çıkma", "Normalden daha sık idrara çıkıyorum."],
+        ["Bulanık İdrar", "İdrarım bulanık veya donuk görünüyor."],
+        ["İdrarda kan", "İdrarımın içinde kan görülüyor."],
+        ["Mesaneyi kontrol etmede zorluk", "İdrar kesemi kontrol etmekte zorlanıyorum, bu da sızıntıya yol açıyor."],
+        ["Bağırsakları kontrol etmede zorluk", "Bağırsaklarımı kontrol etmekte zorlanıyorum, bu da sızıntıya yol açıyor."],
+        ["Koyu idrar", "İdrarım normalden daha koyu renkli."],
+        ["Soluk veya kil renginde dışkı", "Dışkım solgun veya kil renginde."],
+        ["İdrar aciliyeti", "Aniden ve şiddetli bir şekilde idrara çıkma ihtiyacı hissediyorum."]
+    ],
+    "Kas ve İskelet Sistemi": [
+        ["Eklem ağrısı", "Eklem yerlerimde ağrı veya rahatsızlık hissediyorum."],
+        ["Kısıtlı hareket", "Normal hareket aralığında kısıtlama var."],
+        ["Zayıflık", "Güçsüzlük veya enerji eksikliği hissediyorum."],
+        ["Kas erimesi", "Kaslarım küçülüyor veya kütle kaybediyor."],
+        ["Gece bacak krampları", "Gece boyunca bacaklarımda kramplar yaşıyorum."],
+        ["Eklemlerde şişme", "Eklem yerlerimde anormal büyümeler var."],
+        ["Sertlik", "Bazı vücut parçalarımı hareket ettirmekte zorluk çekiyorum."],
+        ["Kas spazmları", "Kaslarımda istemsiz kasılmalar yaşıyorum."]
+    ],
+    "Solunum Sistemi (Akciğerler)": [
+        ["Hapşırma", "Burnumdan şiddetle hava fırlatıyorum."],
+        ["Burun tıkanıklığı", "Burun geçişlerim tıkanmış veya tıkalı."],
+        ["Öksürme", "Akciğerlerimden aniden keskin bir sesle hava atıyorum."],
+        ["Burun akması", "Burnum fazla mukus üretiyor."],
+        ["Boğaz ağrısı", "Boğazımda ağrı veya tahriş var."],
+        ["Hırıltı", "Nefes alırken ıslık benzeri bir ses çıkarıyorum."],
+        ["Öksürük atakları", "Ani ve şiddetli öksürük krizleri yaşıyorum."],
+        ["Nefes darlığı", "Nefes almakta zorlanıyorum ve nefessiz kalıyorum."],
+        ["Göğüste sıkışma", "Göğsümde sıkışma veya baskı hissediyorum."],
+        ["Hızlı nefes alma", "Normalden daha hızlı nefes alıyorum."]
+    ]
+  }
+  
