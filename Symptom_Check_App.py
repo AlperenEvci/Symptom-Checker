@@ -4,7 +4,6 @@ from transformers import pipeline
 import pandas as pd 
 import io
 import json
-from openai import OpenAI
 import tensorflow as tf
 from transformers import TFAutoModelForSequenceClassification, AutoTokenizer
 
