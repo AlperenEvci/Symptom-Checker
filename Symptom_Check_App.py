@@ -6,25 +6,28 @@ import io
 import json
 import tensorflow as tf
 from transformers import TFAutoModelForSequenceClassification, AutoTokenizer
-
-
-# Load model
-model_name = "AlperenEvci/bert-symptom-diagnosis"
-model = TFAutoModelForSequenceClassification.from_pretrained(model_name)
-tokenizer = AutoTokenizer.from_pretrained(model_name)
 import google.generativeai as genai
 
-def get_data(file:str):
-    with open(file) as files:
-        data = json.load(files)
-    return data
-#Bu Python fonksiyonu, bir JSON dosyasından veri okur ve yüklenen veriyi döndürür. İşlevin parametreleri ve dönüş değeri aşağıdaki gibidir:
-#file (str): Okunacak JSON dosyasının yolu.
-#Dönen değer: Belirtilen JSON dosyasından yüklenen veri (bir sözlük).
-#Fonksiyonun çalışma mantığı şu şekildedir:
-#with open(file) as files: satırı, belirtilen dosyayı açar ve bu dosyayı files adlı bir dosya nesnesine atar.
-#json.load(files) satırı, dosya nesnesini kullanarak JSON verisini yükler ve bir Python sözlüğü olarak döndürür.
-#Fonksiyon, yüklenen veriyi data adlı bir değişkende saklar ve bu veriyi döndürür.
+# Load model
+#model_name = "AlperenEvci/bert-symptom-diagnosis"
+#bunu aşağıdaki gibi değiştirdik çünkü modeli huggingface'den çekmek yerine localde çalıştırıyoruz
+#kodu atarken dikkat et
+
+model_name = "bert-symptom-diagnosis"
+model = TFAutoModelForSequenceClassification.from_pretrained(model_name)
+tokenizer = AutoTokenizer.from_pretrained(model_name)
+
+# def get_data(file:str):
+#     with open(file, encoding='utf-8') as files:
+#         data = json.load(files)
+#     return data
+# #Bu Python fonksiyonu, bir JSON dosyasından veri okur ve yüklenen veriyi döndürür. İşlevin parametreleri ve dönüş değeri aşağıdaki gibidir:
+# #file (str): Okunacak JSON dosyasının yolu.
+# #Dönen değer: Belirtilen JSON dosyasından yüklenen veri (bir sözlük).
+# #Fonksiyonun çalışma mantığı şu şekildedir:
+# #with open(file) as files: satırı, belirtilen dosyayı açar ve bu dosyayı files adlı bir dosya nesnesine atar.
+# #json.load(files) satırı, dosya nesnesini kullanarak JSON verisini yükler ve bir Python sözlüğü olarak döndürür.
+# #Fonksiyon, yüklenen veriyi data adlı bir değişkende saklar ve bu veriyi döndürür.
  
 
 def callGemınıAI(text,prompt):
@@ -59,14 +62,14 @@ def analyze_probabilities(predictions):
 def main():
     # import symptoms data
     symptoms = get_data('symptoms_eng.json')
-
+    #I want to add exit button()
     # Create sidebar and pages content
-    tabs = ["Home", "About Us", "Model Details & Evaluations"]
-    st.sidebar.header("Welcome to the Symptom checker app ! This app provide diagnosis based on your symptoms. Feel free to try it out !")
+    tabs = ["Giriş", "Hakkımızda", "Model Detayları ve Değerlendirmeleri"]
+    st.sidebar.header("Symptom checker uygulamasına hoş geldiniz! Bu uygulama, semptomlarınıza dayalı teşhis sağlar. Rahatça deneyebilirsiniz!")
     st.sidebar.divider() 
-    active_tab = st.sidebar.radio("Select Tab", tabs)
-    if active_tab == "Home":
-        st.header("Symptom Checker and Diagnosis App", divider = 'violet')
+    active_tab = st.sidebar.radio("Select Tab", tabs) 
+    if active_tab == "Giriş":
+        st.header("Semptom Kontrol ve Teşhis Uygulaması", divider = 'violet')
  
         st.subheader("👩‍⚕️ Enter your symptoms:")
         st.subheader("get your diagnosis and useful advices")
@@ -84,18 +87,18 @@ def main():
         # Display the updated input_text
         manual_input=st.text_area("Symptoms", value=input_text, height=200)
 
-        st.warning("If you want to know more, please enter your api key and click on submit: ")
-        with st.expander("Click here to enter your api"):
+        st.warning("Daha fazla bilgi almak istiyorsanız lütfen API anahtarınızı girin ve Göndere tıklayın:")
+        with st.expander("API'nizi girmek için buraya tıklayın:"):
             api=st.text_input("API KEY", value="",type='password')
 
         # Button to submit and get the predicted labela
-        if st.button("Submit"):
+        if st.button("Gönder"):
             predictions = get_predictions(manual_input)
             predicted_label,probability=analyze_probabilities(predictions)
 
             # Condition to display only high probability deseases
             if probability > 0.6:
-                st.success(f"Based on your symptoms, there's a {100 * probability:.2f}% probability that you might have {predicted_label}.")
+                st.success(f"Semptomlarınıza dayanarak, {100 * probability:.2f}% olasılıkla {predicted_label} olduğunuzu düşünüyoruz.")
                 if api:
      
                     # Try using the provided API key to call GPT-3
@@ -103,20 +106,20 @@ def main():
                     response = callGemınıAI(api,prompt)
 
                     try :
-                        gpt3_response = callGemınıAI(api,prompt)
+                        prompts = callGemınıAI(api,prompt)
                         # Display the GPT-3 response if successful
-                        st.header(f'Information about the **{predicted_label}**')
+                        st.header(f'**{predicted_label}** hakkında bilgi')
                         st.info('Lütfen unutmayın: Bu bilgiler yapay zeka tarafından oluşturulmuştur ve profesyonel tıbbi tavsiyelerin yerine geçmez.')
-                        st.write(gpt3_response)
+                        st.write(prompts)
   
                     except:
                     # Handle case where API call fails
                         st.warning("Unable to retrieve information using the provided API key. Please try another API key if available.")
                 else:
-                    st.write('If you want to know more, please enter your api key')
+                    st.write('Daha fazla bilgi almak istiyorsanız lütfen API anahtarınızı girin ve Göndere tıklayın')
 
-            if probability > 0.4 and probability < 0.6:
-                st.warning(f"Based on your symptoms, there's a {100 * probability:.2f}% probability that you might have {predicted_label}.")
+            elif probability > 0.4 and probability < 0.6:
+                st.warning(f"Semptomlarınıza dayanarak, {100 * probability:.2f}% olasılıkla {predicted_label} olduğunuzu düşünüyoruz.")
                 if api:
      
                     # Try using the provided API key to call GPT-3
@@ -124,22 +127,22 @@ def main():
                     response = callGemınıAI(api,prompt)
 
                     try :
-                        gpt3_response = callGemınıAI(api,prompt)
+                        prompts = callGemınıAI(api,prompt)
                         # Display the GPT-3 response if successful
-                        st.header(f'Information about the **{predicted_label}**')
+                        st.header(f'**{predicted_label}** hakkında bilgi')
                         st.info('Lütfen unutmayın: Bu bilgiler yapay zeka tarafından oluşturulmuştur ve profesyonel tıbbi tavsiyelerin yerine geçmez.')
-                        st.write(gpt3_response)
+                        st.write(prompts)
   
                     except:
                     # Handle case where API call fails
-                        st.warning("Unable to retrieve information using the provided API key. Please try another API key if available.")
+                        st.warning("Sağlanan API anahtarıyla bilgi alınamıyor. Lütfen başka bir API anahtarı deneyin, eğer mevcutsa.")
                 else:
-                    st.write('If you want to know more, please enter your api key')
+                    st.write('Daha fazla bilgi almak istiyorsanız lütfen API anahtarınızı girin ve Göndere tıklayın')
 
             else:
-                st.warning("The symptoms you've described do not strongly indicate any of the 22 diseases in our database with a high probability. It's recommended to consult a healthcare professional for a more accurate diagnosis.")
+                st.warning("Tarif ettiğiniz semptomlar, veritabanımızdaki 22 hastalıktan herhangi birini yüksek bir olasılıkla belirtmiyor. Daha doğru bir teşhis için bir sağlık profesyoneline danışmanız önerilir.")
                 # Expander to show the list of diseases
-                with st.expander("Click here to view the list of diseases"):
+                with st.expander("Hastalık listesini görmek için buraya tıklayın:"):
                     for disease in diseases:
                         st.write(disease)
 
@@ -149,17 +152,19 @@ def main():
             st.markdown("**[Alperen EVCİ](https://www.linkedin.com/in/alperen-evci/)**")
             st.markdown("**[Emir SELENGİL](https://www.linkedin.com/in/emir-selengil/)**")
             st.markdown("**[Akın BEKTAŞ](https://www.linkedin.com/in/akin-bektas/)**")
-            st.markdown(" We are a dynamic duo of data scientists collaborating to enhance our skills and stay at the forefront of the latest developments. With backgrounds in science and experience working with health data, we bring a unique blend of expertise to our data science projects. Our shared passion and commitment drive us to showcase and elevate our capabilities through innovative and impactful initiatives. Join us on this journey of continuous improvement and exploration in the world of data science. ")
+            st.markdown(" Merhaba! Biz, veri bilimine yeni adım atan üç kişilik bir ekip olarak buradayız. Sürekli olarak yeni şeyler öğrenmeye ve alanın gelişmelerini takip etmeye çalışıyoruz. Farklı bilim geçmişlerimizle, projelerimize çeşitlilik katıyoruz. Ortak bir tutkumuz var ve bu tutku, bizi yaratıcı ve etkili projelere yönlendiriyor. Eğer bizimle birlikte veri bilimi dünyasına adım atmak isterseniz, sizi aramızda görmekten mutluluk duyarız! ")
             st.markdown(" ")
 
-    elif active_tab == "Model Details & Evaluations":
+    elif active_tab == "Model Detayları ve Değerlendirmeleri":
         st.subheader("Model Overview:")
-        st.write("This model is a fine-tuned adaptation of the bert-base-cased architecture, specifically designed for text classification tasks associated with diagnosing diseases based on symptoms. The primary goal is to scrutinize natural language symptom descriptions and accurately predict one of 22 potential diagnoses.")
+        st.write("Bu model, bert-base-cased mimarisinin fine-tuned bir uyarlamasıdır ve özellikle semptomlara dayalı hastalıkları teşhis etme ile ilgili metin sınıflandırma görevleri için tasarlanmıştır. Temel amaç, doğal dildeki semptom açıklamalarını detaylı bir şekilde incelemek ve 22 potansiyel teşhisi doğru bir şekilde tahmin etmektir.")
         st.subheader("Dataset Information:")
-        st.write("The model was trained on the Gretel/symptom_to_diagnosis dataset, which consists of 1,065 symptom descriptions in English, each labeled with one of the 22 possible diagnoses. This dataset focuses on detailed, fine-grained, single-domain diagnosis, making it suitable for tasks requiring nuanced symptom classification. For those interested in utilizing the model, the Symptom Checker and Diagnosis App, or the Inference API, are accessible at [https://huggingface.co/AlperenEvci/bert-symptom-diagnosis](https://huggingface.co/AlperenEvci/bert-symptom-diagnosis).")
+        st.write("Model, 1.065 semptom açıklamasından oluşan İngilizce Gretel/symptom_to_diagnosis veri kümesi üzerinde eğitildi. Her bir semptom açıklaması, 22 olası teşhisten biriyle etiketlenmiştir. Bu veri kümesi, ayrıntılı, ince detaylı ve tek bir alan olan teşhislere odaklanarak, nüanslı semptom sınıflandırması gerektiren görevler için uygun hale getirilmiştir. Modeli kullanmak isteyenler için, Semptom Kontrol ve Teşhis Uygulaması veya Çıkarım API'si, [https://huggingface.co/AlperenEvci/bert-symptom-diagnosis](https://huggingface.co/AlperenEvci/bert-symptom-diagnosis). adresinde erişilebilir.")
         st.subheader("Model Performance Metrics:")
         metrics_data = pd.read_csv(io.StringIO(metrics_table), sep="|").dropna()
         st.table(metrics_data)
+
+
 
 
 
